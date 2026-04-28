@@ -14,6 +14,8 @@
 ### 1. Ubuntu 26.04 LTSのダウンロード
 
 - 公式ページの [WSLイメージ](https://releases.ubuntu.com/26.04/) を使用します。
+- 移行手順の参考: [WSL2 Ubuntu 26.04 移行メモ](https://kwrkb.com/wsl2-ubuntu-2604-mi-gration/)
+- 既存環境から移行する場合は、上記記事の注意点（バックアップや移行前確認）を先に確認しておくと安全です。
 - ダウンロード後、PowerShellで以下を実行します。
 
 ```powershell
