@@ -46,6 +46,36 @@ echo "${USER} ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/${USER} >/dev/n
 sudo chmod 440 /etc/sudoers.d/${USER}
 ```
 
+### 2.6 Optional: uv と Node.js をインストールする
+
+Python ツールチェーンとして `uv`、JavaScript ツールチェーンとして Node.js を利用する場合は、以下を実行します。
+
+#### uv
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+export PATH="$HOME/.local/bin:$PATH"
+uv --version
+```
+
+永続化する場合は、`~/.bashrc` に PATH を追加します。
+
+```bash
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+#### Node.js (nvm 経由)
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+source ~/.bashrc
+nvm install --lts
+nvm use --lts
+node -v
+npm -v
+```
+
 ### 3. curlで `git_init.sh` を直接取得してパイプ実行
 
 リポジトリーをcloneせずに、スクリプトを直接取得してそのまま実行する場合は以下を使用します。
