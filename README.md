@@ -35,52 +35,23 @@ Help improve Ubuntu!
 Would you like to opt-in to platform metrics collection (Y/n)?
 ```
 
-### 3. GitHubのリポジトリーをダウンロードして `scripts/git_init.sh` を実行
+### 3. curlで `git_init.sh` を直接取得してパイプ実行
 
-WSL上のターミナルで、以下の手順を実行します。
-
-- スクリプト: https://github.com/itouhi/wsl_setup/blob/main/scripts/git_init.sh
-
-```bash
-git clone https://github.com/itouhi/wsl_setup.git
-cd wsl_setup
-chmod +x scripts/git_init.sh
-```
+リポジトリーをcloneせずに、スクリプトを直接取得してそのまま実行する場合は以下を使用します。
 
 ユーザー名とメールアドレスを引数で指定して実行する場合:
 
 ```bash
-./scripts/git_init.sh "Your Name" "you@example.com"
+curl -fsSL https://raw.githubusercontent.com/itouhi/wsl_setup/main/scripts/git_init.sh | bash -s -- "Your Name" "you@example.com"
 ```
 
 未指定で実行し、プロンプト入力する場合:
 
 ```bash
-./scripts/git_init.sh
+curl -fsSL https://raw.githubusercontent.com/itouhi/wsl_setup/main/scripts/git_init.sh | bash
 ```
 
-### 4. curlで `git_init.sh` を直接ダウンロードして実行
-
-リポジトリーをcloneせずに、スクリプトを直接ダウンロードして実行する場合は以下を使用します。
-
-```bash
-curl -fsSL -o git_init.sh https://raw.githubusercontent.com/itouhi/wsl_setup/main/scripts/git_init.sh
-chmod +x git_init.sh
-```
-
-ユーザー名とメールアドレスを引数で指定して実行する場合:
-
-```bash
-./git_init.sh "Your Name" "you@example.com"
-```
-
-未指定で実行し、プロンプト入力する場合:
-
-```bash
-./git_init.sh
-```
-
-### 5. Optional: SSHコマンド alias 設定
+### 4. Optional: SSHコマンド alias 設定
 
 1Password SSH agent を Git 以外でも使う場合、`ssh` と `ssh-add` を `ssh.exe` と `ssh-add.exe` に向ける alias を設定できます。
 
