@@ -37,6 +37,15 @@ Help improve Ubuntu!
 Would you like to opt-in to platform metrics collection (Y/n)?
 ```
 
+### 2.5 Optional: sudo をパスワードなしで実行する
+
+必要に応じて、現在のユーザーに `NOPASSWD` 設定を追加できます。
+
+```bash
+echo "${USER} ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/${USER} >/dev/null
+sudo chmod 440 /etc/sudoers.d/${USER}
+```
+
 ### 3. curlで `git_init.sh` を直接取得してパイプ実行
 
 リポジトリーをcloneせずに、スクリプトを直接取得してそのまま実行する場合は以下を使用します。
