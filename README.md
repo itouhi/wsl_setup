@@ -79,3 +79,27 @@ chmod +x git_init.sh
 ```bash
 ./git_init.sh
 ```
+
+### 5. Optional: SSHコマンド alias 設定
+
+1Password SSH agent を Git 以外でも使う場合、`ssh` と `ssh-add` を `ssh.exe` と `ssh-add.exe` に向ける alias を設定できます。
+
+```bash
+chmod +x scripts/ssh_aliases_init.sh
+./scripts/ssh_aliases_init.sh
+```
+
+実行後に表示される `Configured SSH aliases in: ...` のファイルを `source` してください。
+
+```bash
+source ~/.bashrc
+# or
+source ~/.bash_aliases
+```
+
+`~/.bash_aliases` を使いたい場合は、引数で指定できます。
+
+```bash
+./scripts/ssh_aliases_init.sh ~/.bash_aliases
+source ~/.bash_aliases
+```
