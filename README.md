@@ -144,3 +144,19 @@ source ~/.bash_aliases
 ./scripts/ssh_aliases_init.sh ~/.bash_aliases
 source ~/.bash_aliases
 ```
+
+### 5. devcontainer で開く
+
+このリポジトリーには `.devcontainer/` を追加済みです。VS Code で以下の手順を実行すると、コンテナー内で開発できます。
+
+1. Docker が起動していることを確認
+2. VS Code でこのフォルダーを開く
+3. コマンドパレットから `Dev Containers: Reopen in Container` を実行
+
+初回ビルドでは、以下が自動で設定されます。
+
+- Ubuntu 26.04 ベースの開発コンテナー
+- 開発に必要な基本コマンド（git, curl, sudo など）
+- `scripts/*.sh` への実行権限付与
+
+手動で再ビルドする場合は、コマンドパレットから `Dev Containers: Rebuild Container` を実行してください。

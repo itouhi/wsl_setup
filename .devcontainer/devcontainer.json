@@ -1,0 +1,28 @@
+{
+  "name": "wsl-setup-devcontainer",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": false,
+      "username": "vscode",
+      "upgradePackages": true
+    }
+  },
+  "remoteUser": "vscode",
+  "postCreateCommand": "bash -lc 'chmod +x scripts/*.sh'",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true,
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  }
+}
