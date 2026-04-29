@@ -29,12 +29,21 @@
     "vscode": {
       "settings": {
         "editor.formatOnSave": true,
-        "terminal.integrated.defaultProfile.linux": "bash"
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "ansible.ansible.path": "ansible",
+        "ansible.ansibleLint.enabled": true,
+        "ansible.ansibleLint.path": "ansible-lint",
+        "[ansible]": {
+          "editor.detectIndentation": true,
+          "editor.tabSize": 2
+        }
       },
       "extensions": [
         "GitHub.copilot",
         "GitHub.copilot-chat",
-        "ms-azuretools.vscode-docker"
+        "ms-azuretools.vscode-docker",
+        "redhat.ansible",
+        "redhat.vscode-yaml"
       ]
     }
   }

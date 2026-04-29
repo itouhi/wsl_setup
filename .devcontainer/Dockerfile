@@ -9,12 +9,21 @@ RUN apt-get update \
     curl \
     git \
     less \
+    openssh-client \
+    python3 \
+    python3-pip \
     sudo \
     unzip \
     vim \
     wget \
     ripgrep \
+    yamllint \
     && if id -u ubuntu >/dev/null 2>&1; then userdel -r ubuntu; fi \
     && curl -LsSf https://astral.sh/uv/install.sh | env UV_INSTALL_DIR=/usr/local/bin sh \
+    && uv pip install --system --no-cache \
+    ansible \
+    ansible-lint \
+    molecule \
+    molecule-plugins[docker] \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
