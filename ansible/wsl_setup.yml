@@ -1,0 +1,21 @@
+---
+# WSL2 Ubuntu 26.04 LTS セットアップ
+#
+# 実行例:
+#   # 全ロールを実行
+#   ansible-playbook -i inventories/hosts wsl_setup.yml -e "git_user_name='Your Name' git_user_email='you@example.com'"
+#
+#   # 特定タグのみ実行
+#   ansible-playbook -i inventories/hosts wsl_setup.yml --tags docker
+#
+#   # 対象ホストを確認
+#   ansible-playbook -i inventories/hosts wsl_setup.yml --list-hosts
+
+- hosts: local
+  roles:
+    - common
+    - git
+    - uv
+    - nodejs
+    - docker
+    - ssh_aliases

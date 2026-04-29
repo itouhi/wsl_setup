@@ -1,0 +1,3 @@
+---
+# WSL2 Ubuntu 26.04 LTS セットアップ - マスターplaybook
+- import_playbook: wsl_setup.yml

@@ -1,0 +1,10 @@
+# git ロール用変数（実行時に上書きして使用）
+# 例: ansible-playbook site.yml -e "git_user_name='Your Name' git_user_email='you@example.com'"
+git_user_name: ""
+git_user_email: ""
+
+# nvm バージョン
+nvm_version: "v0.40.3"
+
+# Node.js バージョン（lts を指定）
+nodejs_version: "--lts"
