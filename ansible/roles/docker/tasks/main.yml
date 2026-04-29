@@ -1,0 +1,59 @@
+---
+- name: Docker GPGキー取得用の依存パッケージをインストールする
+  become: true
+  apt:
+    name:
+      - ca-certificates
+      - curl
+    state: present
+    update_cache: true
+  tags: docker
+
+- name: Docker APTキーリング用ディレクトリを作成する
+  become: true
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: "0755"
+  tags: docker
+
+- name: DockerのGPGキーを取得する
+  become: true
+  get_url:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    dest: /etc/apt/keyrings/docker.asc
+    mode: "0444"
+  tags: docker
+
+- name: DockerのAPTリポジトリを追加する
+  become: true
+  apt_repository:
+    repo: >-
+      deb [arch={{ ansible_architecture | replace('x86_64', 'amd64') }}
+      signed-by=/etc/apt/keyrings/docker.asc]
+      https://download.docker.com/linux/ubuntu {{ ansible_distribution_release
+      }} stable
+    state: present
+    filename: docker
+  tags: docker
+
+- name: Docker Engineをインストールする
+  become: true
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+    state: present
+    update_cache: true
+  tags: docker
+
+- name: 現在のユーザーをdockerグループに追加する（sudoなしで使用可能にする）
+  become: true
+  user:
+    name: "{{ ansible_user_id }}"
+    groups: docker
+    append: true
+  tags: docker

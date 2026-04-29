@@ -1,0 +1,18 @@
+---
+- name: uvがすでにインストール済みか確認する
+  command: which uv
+  register: uv_check
+  changed_when: false
+  failed_when: false
+  tags: uv
+
+- name: uvをインストールする
+  shell: curl -LsSf https://astral.sh/uv/install.sh | env
+    UV_INSTALL_DIR=/usr/local/bin sh
+  when: uv_check.rc != 0
+  tags: uv
+
+- name: uvのバージョンを確認する
+  command: uv --version
+  changed_when: false
+  tags: uv

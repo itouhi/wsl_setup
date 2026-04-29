@@ -1,0 +1,29 @@
+---
+- name: nvmがすでにインストール済みか確認する
+  stat:
+    path: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+  register: nvm_stat
+  tags: nodejs
+
+- name: nvmをインストールする
+  shell: >
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ nvm_version
+    }}/install.sh | bash
+  when: not nvm_stat.stat.exists
+  tags: nodejs
+
+- name: Node.js LTSをインストールする
+  shell: >
+    source {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install {{ nodejs_version
+    }} && nvm use {{ nodejs_version }}
+  args:
+    executable: /bin/bash
+  tags: nodejs
+
+- name: nodeのバージョンを確認する
+  shell: >
+    source {{ ansible_env.HOME }}/.nvm/nvm.sh && node -v
+  args:
+    executable: /bin/bash
+  changed_when: false
+  tags: nodejs

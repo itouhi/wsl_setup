@@ -1,0 +1,9 @@
+---
+- name: 現在のユーザーにNOPASSWDのsudo権限を付与する
+  become: true
+  copy:
+    content: "{{ ansible_user_id }} ALL=(ALL) NOPASSWD: ALL\n"
+    dest: "/etc/sudoers.d/{{ ansible_user_id }}"
+    mode: "0440"
+    validate: visudo -cf %s
+  tags: common

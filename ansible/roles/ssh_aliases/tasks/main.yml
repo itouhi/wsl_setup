@@ -1,0 +1,35 @@
+---
+- name: ~/.bash_aliasesが存在するか確認する
+  stat:
+    path: "{{ ansible_env.HOME }}/.bash_aliases"
+  register: bash_aliases_stat
+  tags: ssh_aliases
+
+- name: SSH aliasを設定するターゲットファイルを決定する
+  set_fact:
+    ssh_alias_target: "{{ ansible_env.HOME }}/.bash_aliases"
+  tags: ssh_aliases
+
+- name: ターゲットファイルが存在しない場合は作成する
+  file:
+    path: "{{ ssh_alias_target }}"
+    state: touch
+    mode: "0644"
+  when: not bash_aliases_stat.stat.exists
+  tags: ssh_aliases
+
+- name: 1Password SSH agentのためsshコマンドをssh.exeにエイリアスする
+  lineinfile:
+    path: "{{ ssh_alias_target }}"
+    regexp: "^\\s*alias\\s+ssh="
+    line: "alias ssh='ssh.exe'"
+    state: present
+  tags: ssh_aliases
+
+- name: 1Password SSH agentのためssh-addコマンドをssh-add.exeにエイリアスする
+  lineinfile:
+    path: "{{ ssh_alias_target }}"
+    regexp: "^\\s*alias\\s+ssh-add="
+    line: "alias ssh-add='ssh-add.exe'"
+    state: present
+  tags: ssh_aliases
