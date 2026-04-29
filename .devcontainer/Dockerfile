@@ -18,12 +18,18 @@ RUN apt-get update \
     wget \
     ripgrep \
     yamllint \
-    && if id -u ubuntu >/dev/null 2>&1; then userdel -r ubuntu; fi \
-    && curl -LsSf https://astral.sh/uv/install.sh | env UV_INSTALL_DIR=/usr/local/bin sh \
-    && uv pip install --system --no-cache \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Remove the default 'ubuntu' user if it exists to avoid conflicts with the devcontainer user
+RUN if id -u ubuntu >/dev/null 2>&1; then userdel -r ubuntu; fi
+
+# Install UV and Ansible-related tools
+RUN curl -LsSf https://astral.sh/uv/install.sh | env UV_INSTALL_DIR=/usr/local/bin sh
+
+# Install Ansible and related tools using UV
+RUN uv pip install --system --break-system-packages --no-cache \
     ansible \
     ansible-lint \
     molecule \
-    molecule-plugins[docker] \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    molecule-plugins[docker]
