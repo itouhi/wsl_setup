@@ -160,3 +160,9 @@ source ~/.bash_aliases
 - `scripts/*.sh` への実行権限付与
 
 手動で再ビルドする場合は、コマンドパレットから `Dev Containers: Rebuild Container` を実行してください。
+
+コンテナー内から bind mount を使う場合は、コンテナー内パスではなくホスト側パスを使ってください。devcontainer では `LOCAL_WORKSPACE_FOLDER` にホスト側のワークスペース絶対パスが入ります。
+
+```bash
+docker run --rm -v "$LOCAL_WORKSPACE_FOLDER":/workspace alpine ls /workspace
+```

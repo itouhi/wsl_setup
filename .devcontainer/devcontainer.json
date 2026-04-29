@@ -8,9 +8,22 @@
       "installZsh": false,
       "username": "vscode",
       "upgradePackages": true
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "moby": true
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    },
+    "ghcr.io/devcontainers/features/aws-cli:1": {
+      "version": "latest"
     }
   },
   "remoteUser": "vscode",
+  "remoteEnv": {
+    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+  },
   "postCreateCommand": "bash -lc 'chmod +x scripts/*.sh'",
   "customizations": {
     "vscode": {
